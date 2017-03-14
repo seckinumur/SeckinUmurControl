@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4d735f82dd344d50b9177fef061be62f" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="seckinumurModel.Ayarlars" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="seckinumurModel.ChoiceDrives" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="seckinumurModel.GelenMesajlars" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="seckinumurModel.GidenMesajlars" Width="1.5" PointX="8.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="seckinumurModel.Kullanicilars" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="seckinumurModel.MesajKlasorus" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <AssociationConnector Association="seckinumurModel.FK_dbo_Kullanicilars_dbo_Ayarlars_AyarlarID" ManuallyRouted="false" />
+        <AssociationConnector Association="seckinumurModel.FK_dbo_GelenMesajlars_dbo_ChoiceDrives_ChoiceDriveID" ManuallyRouted="false" />
+        <AssociationConnector Association="seckinumurModel.FK_dbo_GidenMesajlars_dbo_ChoiceDrives_ChoiceDriveID" ManuallyRouted="false" />
+        <AssociationConnector Association="seckinumurModel.FK_dbo_GelenMesajlars_dbo_Kullanicilars_KullanicilarID" ManuallyRouted="false" />
+        <AssociationConnector Association="seckinumurModel.FK_dbo_GelenMesajlars_dbo_MesajKlasorus_MesajKlasoruID" ManuallyRouted="false" />
+        <AssociationConnector Association="seckinumurModel.FK_dbo_GidenMesajlars_dbo_Kullanicilars_KullanicilarID" ManuallyRouted="false" />
+        <AssociationConnector Association="seckinumurModel.FK_dbo_GidenMesajlars_dbo_MesajKlasorus_MesajKlasoruID" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

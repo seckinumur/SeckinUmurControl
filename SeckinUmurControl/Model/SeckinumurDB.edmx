@@ -1,0 +1,540 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="seckinumurModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Ayarlars">
+          <Key>
+            <PropertyRef Name="AyarlarID" />
+          </Key>
+          <Property Name="AyarlarID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KullanicilarID" Type="int" Nullable="false" />
+          <Property Name="DiskSiniri" Type="int" Nullable="false" />
+          <Property Name="UyelikTipi" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ChoiceDrives">
+          <Key>
+            <PropertyRef Name="ChoiceDriveID" />
+          </Key>
+          <Property Name="ChoiceDriveID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Konumu" Type="nvarchar(max)" />
+          <Property Name="Silindimi" Type="bit" Nullable="false" />
+          <Property Name="Paylasimdami" Type="bit" Nullable="false" />
+          <Property Name="KullanicilarID" Type="int" Nullable="false" />
+          <Property Name="Tarih" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="GelenMesajlars">
+          <Key>
+            <PropertyRef Name="GelenMesajlarID" />
+          </Key>
+          <Property Name="GelenMesajlarID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Mesaj" Type="nvarchar(max)" />
+          <Property Name="Okundumu" Type="bit" Nullable="false" />
+          <Property Name="Silindimi" Type="bit" Nullable="false" />
+          <Property Name="MesajKlasoruID" Type="int" Nullable="false" />
+          <Property Name="KullanicilarID" Type="int" Nullable="false" />
+          <Property Name="Gonderen" Type="int" Nullable="false" />
+          <Property Name="Tarih" Type="nvarchar(max)" />
+          <Property Name="ChoiceDriveID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GidenMesajlars">
+          <Key>
+            <PropertyRef Name="GidenMesajlarID" />
+          </Key>
+          <Property Name="GidenMesajlarID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Mesaj" Type="nvarchar(max)" />
+          <Property Name="Okundumu" Type="bit" Nullable="false" />
+          <Property Name="Silindimi" Type="bit" Nullable="false" />
+          <Property Name="MesajKlasoruID" Type="int" Nullable="false" />
+          <Property Name="KullanicilarID" Type="int" Nullable="false" />
+          <Property Name="Gonderilen" Type="int" Nullable="false" />
+          <Property Name="Tarih" Type="nvarchar(max)" />
+          <Property Name="ChoiceDriveID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kullanicilars">
+          <Key>
+            <PropertyRef Name="KullanicilarID" />
+          </Key>
+          <Property Name="KullanicilarID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Adi" Type="nvarchar(max)" />
+          <Property Name="Sifresi" Type="nvarchar(max)" />
+          <Property Name="Yetkisi" Type="nvarchar(max)" />
+          <Property Name="ProfilResmi" Type="nvarchar(max)" />
+          <Property Name="Aktifmi" Type="bit" Nullable="false" />
+          <Property Name="EklenmeTarihi" Type="nvarchar(max)" />
+          <Property Name="Online" Type="bit" Nullable="false" />
+          <Property Name="AyarlarID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MesajKlasorus">
+          <Key>
+            <PropertyRef Name="MesajKlasoruID" />
+          </Key>
+          <Property Name="MesajKlasoruID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KlasorAdi" Type="nvarchar(max)" />
+          <Property Name="Silindimi" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_GelenMesajlars_dbo_ChoiceDrives_ChoiceDriveID">
+          <End Role="ChoiceDrives" Type="Self.ChoiceDrives" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="GelenMesajlars" Type="Self.GelenMesajlars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChoiceDrives">
+              <PropertyRef Name="ChoiceDriveID" />
+            </Principal>
+            <Dependent Role="GelenMesajlars">
+              <PropertyRef Name="ChoiceDriveID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_GelenMesajlars_dbo_Kullanicilars_KullanicilarID">
+          <End Role="Kullanicilars" Type="Self.Kullanicilars" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="GelenMesajlars" Type="Self.GelenMesajlars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanicilars">
+              <PropertyRef Name="KullanicilarID" />
+            </Principal>
+            <Dependent Role="GelenMesajlars">
+              <PropertyRef Name="KullanicilarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_GelenMesajlars_dbo_MesajKlasorus_MesajKlasoruID">
+          <End Role="MesajKlasorus" Type="Self.MesajKlasorus" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="GelenMesajlars" Type="Self.GelenMesajlars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MesajKlasorus">
+              <PropertyRef Name="MesajKlasoruID" />
+            </Principal>
+            <Dependent Role="GelenMesajlars">
+              <PropertyRef Name="MesajKlasoruID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_GidenMesajlars_dbo_ChoiceDrives_ChoiceDriveID">
+          <End Role="ChoiceDrives" Type="Self.ChoiceDrives" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="GidenMesajlars" Type="Self.GidenMesajlars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChoiceDrives">
+              <PropertyRef Name="ChoiceDriveID" />
+            </Principal>
+            <Dependent Role="GidenMesajlars">
+              <PropertyRef Name="ChoiceDriveID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_GidenMesajlars_dbo_Kullanicilars_KullanicilarID">
+          <End Role="Kullanicilars" Type="Self.Kullanicilars" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="GidenMesajlars" Type="Self.GidenMesajlars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanicilars">
+              <PropertyRef Name="KullanicilarID" />
+            </Principal>
+            <Dependent Role="GidenMesajlars">
+              <PropertyRef Name="KullanicilarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_GidenMesajlars_dbo_MesajKlasorus_MesajKlasoruID">
+          <End Role="MesajKlasorus" Type="Self.MesajKlasorus" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="GidenMesajlars" Type="Self.GidenMesajlars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MesajKlasorus">
+              <PropertyRef Name="MesajKlasoruID" />
+            </Principal>
+            <Dependent Role="GidenMesajlars">
+              <PropertyRef Name="MesajKlasoruID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Kullanicilars_dbo_Ayarlars_AyarlarID">
+          <End Role="Ayarlars" Type="Self.Ayarlars" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Kullanicilars" Type="Self.Kullanicilars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ayarlars">
+              <PropertyRef Name="AyarlarID" />
+            </Principal>
+            <Dependent Role="Kullanicilars">
+              <PropertyRef Name="AyarlarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="seckinumurModelStoreContainer">
+          <EntitySet Name="Ayarlars" EntityType="Self.Ayarlars" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChoiceDrives" EntityType="Self.ChoiceDrives" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GelenMesajlars" EntityType="Self.GelenMesajlars" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GidenMesajlars" EntityType="Self.GidenMesajlars" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kullanicilars" EntityType="Self.Kullanicilars" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MesajKlasorus" EntityType="Self.MesajKlasorus" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_GelenMesajlars_dbo_ChoiceDrives_ChoiceDriveID" Association="Self.FK_dbo_GelenMesajlars_dbo_ChoiceDrives_ChoiceDriveID">
+            <End Role="ChoiceDrives" EntitySet="ChoiceDrives" />
+            <End Role="GelenMesajlars" EntitySet="GelenMesajlars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_GelenMesajlars_dbo_Kullanicilars_KullanicilarID" Association="Self.FK_dbo_GelenMesajlars_dbo_Kullanicilars_KullanicilarID">
+            <End Role="Kullanicilars" EntitySet="Kullanicilars" />
+            <End Role="GelenMesajlars" EntitySet="GelenMesajlars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_GelenMesajlars_dbo_MesajKlasorus_MesajKlasoruID" Association="Self.FK_dbo_GelenMesajlars_dbo_MesajKlasorus_MesajKlasoruID">
+            <End Role="MesajKlasorus" EntitySet="MesajKlasorus" />
+            <End Role="GelenMesajlars" EntitySet="GelenMesajlars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_GidenMesajlars_dbo_ChoiceDrives_ChoiceDriveID" Association="Self.FK_dbo_GidenMesajlars_dbo_ChoiceDrives_ChoiceDriveID">
+            <End Role="ChoiceDrives" EntitySet="ChoiceDrives" />
+            <End Role="GidenMesajlars" EntitySet="GidenMesajlars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_GidenMesajlars_dbo_Kullanicilars_KullanicilarID" Association="Self.FK_dbo_GidenMesajlars_dbo_Kullanicilars_KullanicilarID">
+            <End Role="Kullanicilars" EntitySet="Kullanicilars" />
+            <End Role="GidenMesajlars" EntitySet="GidenMesajlars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_GidenMesajlars_dbo_MesajKlasorus_MesajKlasoruID" Association="Self.FK_dbo_GidenMesajlars_dbo_MesajKlasorus_MesajKlasoruID">
+            <End Role="MesajKlasorus" EntitySet="MesajKlasorus" />
+            <End Role="GidenMesajlars" EntitySet="GidenMesajlars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Kullanicilars_dbo_Ayarlars_AyarlarID" Association="Self.FK_dbo_Kullanicilars_dbo_Ayarlars_AyarlarID">
+            <End Role="Ayarlars" EntitySet="Ayarlars" />
+            <End Role="Kullanicilars" EntitySet="Kullanicilars" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="seckinumurModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Ayarlars">
+          <Key>
+            <PropertyRef Name="AyarlarID" />
+          </Key>
+          <Property Name="AyarlarID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KullanicilarID" Type="Int32" Nullable="false" />
+          <Property Name="DiskSiniri" Type="Int32" Nullable="false" />
+          <Property Name="UyelikTipi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Kullanicilars" Relationship="Self.FK_dbo_Kullanicilars_dbo_Ayarlars_AyarlarID" FromRole="Ayarlars" ToRole="Kullanicilars" />
+        </EntityType>
+        <EntityType Name="ChoiceDrives">
+          <Key>
+            <PropertyRef Name="ChoiceDriveID" />
+          </Key>
+          <Property Name="ChoiceDriveID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Konumu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Silindimi" Type="Boolean" Nullable="false" />
+          <Property Name="Paylasimdami" Type="Boolean" Nullable="false" />
+          <Property Name="KullanicilarID" Type="Int32" Nullable="false" />
+          <Property Name="Tarih" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="GelenMesajlars" Relationship="Self.FK_dbo_GelenMesajlars_dbo_ChoiceDrives_ChoiceDriveID" FromRole="ChoiceDrives" ToRole="GelenMesajlars" />
+          <NavigationProperty Name="GidenMesajlars" Relationship="Self.FK_dbo_GidenMesajlars_dbo_ChoiceDrives_ChoiceDriveID" FromRole="ChoiceDrives" ToRole="GidenMesajlars" />
+        </EntityType>
+        <EntityType Name="GelenMesajlars">
+          <Key>
+            <PropertyRef Name="GelenMesajlarID" />
+          </Key>
+          <Property Name="GelenMesajlarID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Mesaj" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Okundumu" Type="Boolean" Nullable="false" />
+          <Property Name="Silindimi" Type="Boolean" Nullable="false" />
+          <Property Name="MesajKlasoruID" Type="Int32" Nullable="false" />
+          <Property Name="KullanicilarID" Type="Int32" Nullable="false" />
+          <Property Name="Gonderen" Type="Int32" Nullable="false" />
+          <Property Name="Tarih" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ChoiceDriveID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ChoiceDrives" Relationship="Self.FK_dbo_GelenMesajlars_dbo_ChoiceDrives_ChoiceDriveID" FromRole="GelenMesajlars" ToRole="ChoiceDrives" />
+          <NavigationProperty Name="Kullanicilars" Relationship="Self.FK_dbo_GelenMesajlars_dbo_Kullanicilars_KullanicilarID" FromRole="GelenMesajlars" ToRole="Kullanicilars" />
+          <NavigationProperty Name="MesajKlasorus" Relationship="Self.FK_dbo_GelenMesajlars_dbo_MesajKlasorus_MesajKlasoruID" FromRole="GelenMesajlars" ToRole="MesajKlasorus" />
+        </EntityType>
+        <EntityType Name="GidenMesajlars">
+          <Key>
+            <PropertyRef Name="GidenMesajlarID" />
+          </Key>
+          <Property Name="GidenMesajlarID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Mesaj" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Okundumu" Type="Boolean" Nullable="false" />
+          <Property Name="Silindimi" Type="Boolean" Nullable="false" />
+          <Property Name="MesajKlasoruID" Type="Int32" Nullable="false" />
+          <Property Name="KullanicilarID" Type="Int32" Nullable="false" />
+          <Property Name="Gonderilen" Type="Int32" Nullable="false" />
+          <Property Name="Tarih" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ChoiceDriveID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ChoiceDrives" Relationship="Self.FK_dbo_GidenMesajlars_dbo_ChoiceDrives_ChoiceDriveID" FromRole="GidenMesajlars" ToRole="ChoiceDrives" />
+          <NavigationProperty Name="Kullanicilars" Relationship="Self.FK_dbo_GidenMesajlars_dbo_Kullanicilars_KullanicilarID" FromRole="GidenMesajlars" ToRole="Kullanicilars" />
+          <NavigationProperty Name="MesajKlasorus" Relationship="Self.FK_dbo_GidenMesajlars_dbo_MesajKlasorus_MesajKlasoruID" FromRole="GidenMesajlars" ToRole="MesajKlasorus" />
+        </EntityType>
+        <EntityType Name="Kullanicilars">
+          <Key>
+            <PropertyRef Name="KullanicilarID" />
+          </Key>
+          <Property Name="KullanicilarID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Adi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Sifresi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Yetkisi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProfilResmi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Aktifmi" Type="Boolean" Nullable="false" />
+          <Property Name="EklenmeTarihi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Online" Type="Boolean" Nullable="false" />
+          <Property Name="AyarlarID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Ayarlars" Relationship="Self.FK_dbo_Kullanicilars_dbo_Ayarlars_AyarlarID" FromRole="Kullanicilars" ToRole="Ayarlars" />
+          <NavigationProperty Name="GelenMesajlars" Relationship="Self.FK_dbo_GelenMesajlars_dbo_Kullanicilars_KullanicilarID" FromRole="Kullanicilars" ToRole="GelenMesajlars" />
+          <NavigationProperty Name="GidenMesajlars" Relationship="Self.FK_dbo_GidenMesajlars_dbo_Kullanicilars_KullanicilarID" FromRole="Kullanicilars" ToRole="GidenMesajlars" />
+        </EntityType>
+        <EntityType Name="MesajKlasorus">
+          <Key>
+            <PropertyRef Name="MesajKlasoruID" />
+          </Key>
+          <Property Name="MesajKlasoruID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KlasorAdi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Silindimi" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="GelenMesajlars" Relationship="Self.FK_dbo_GelenMesajlars_dbo_MesajKlasorus_MesajKlasoruID" FromRole="MesajKlasorus" ToRole="GelenMesajlars" />
+          <NavigationProperty Name="GidenMesajlars" Relationship="Self.FK_dbo_GidenMesajlars_dbo_MesajKlasorus_MesajKlasoruID" FromRole="MesajKlasorus" ToRole="GidenMesajlars" />
+        </EntityType>
+        <Association Name="FK_dbo_Kullanicilars_dbo_Ayarlars_AyarlarID">
+          <End Role="Ayarlars" Type="Self.Ayarlars" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Kullanicilars" Type="Self.Kullanicilars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ayarlars">
+              <PropertyRef Name="AyarlarID" />
+            </Principal>
+            <Dependent Role="Kullanicilars">
+              <PropertyRef Name="AyarlarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_GelenMesajlars_dbo_ChoiceDrives_ChoiceDriveID">
+          <End Role="ChoiceDrives" Type="Self.ChoiceDrives" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="GelenMesajlars" Type="Self.GelenMesajlars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChoiceDrives">
+              <PropertyRef Name="ChoiceDriveID" />
+            </Principal>
+            <Dependent Role="GelenMesajlars">
+              <PropertyRef Name="ChoiceDriveID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_GidenMesajlars_dbo_ChoiceDrives_ChoiceDriveID">
+          <End Role="ChoiceDrives" Type="Self.ChoiceDrives" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="GidenMesajlars" Type="Self.GidenMesajlars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChoiceDrives">
+              <PropertyRef Name="ChoiceDriveID" />
+            </Principal>
+            <Dependent Role="GidenMesajlars">
+              <PropertyRef Name="ChoiceDriveID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_GelenMesajlars_dbo_Kullanicilars_KullanicilarID">
+          <End Role="Kullanicilars" Type="Self.Kullanicilars" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="GelenMesajlars" Type="Self.GelenMesajlars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanicilars">
+              <PropertyRef Name="KullanicilarID" />
+            </Principal>
+            <Dependent Role="GelenMesajlars">
+              <PropertyRef Name="KullanicilarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_GelenMesajlars_dbo_MesajKlasorus_MesajKlasoruID">
+          <End Role="MesajKlasorus" Type="Self.MesajKlasorus" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="GelenMesajlars" Type="Self.GelenMesajlars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MesajKlasorus">
+              <PropertyRef Name="MesajKlasoruID" />
+            </Principal>
+            <Dependent Role="GelenMesajlars">
+              <PropertyRef Name="MesajKlasoruID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_GidenMesajlars_dbo_Kullanicilars_KullanicilarID">
+          <End Role="Kullanicilars" Type="Self.Kullanicilars" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="GidenMesajlars" Type="Self.GidenMesajlars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanicilars">
+              <PropertyRef Name="KullanicilarID" />
+            </Principal>
+            <Dependent Role="GidenMesajlars">
+              <PropertyRef Name="KullanicilarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_GidenMesajlars_dbo_MesajKlasorus_MesajKlasoruID">
+          <End Role="MesajKlasorus" Type="Self.MesajKlasorus" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="GidenMesajlars" Type="Self.GidenMesajlars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MesajKlasorus">
+              <PropertyRef Name="MesajKlasoruID" />
+            </Principal>
+            <Dependent Role="GidenMesajlars">
+              <PropertyRef Name="MesajKlasoruID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="seckinumurEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Ayarlars" EntityType="Self.Ayarlars" />
+          <EntitySet Name="ChoiceDrives" EntityType="Self.ChoiceDrives" />
+          <EntitySet Name="GelenMesajlars" EntityType="Self.GelenMesajlars" />
+          <EntitySet Name="GidenMesajlars" EntityType="Self.GidenMesajlars" />
+          <EntitySet Name="Kullanicilars" EntityType="Self.Kullanicilars" />
+          <EntitySet Name="MesajKlasorus" EntityType="Self.MesajKlasorus" />
+          <AssociationSet Name="FK_dbo_Kullanicilars_dbo_Ayarlars_AyarlarID" Association="Self.FK_dbo_Kullanicilars_dbo_Ayarlars_AyarlarID">
+            <End Role="Ayarlars" EntitySet="Ayarlars" />
+            <End Role="Kullanicilars" EntitySet="Kullanicilars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_GelenMesajlars_dbo_ChoiceDrives_ChoiceDriveID" Association="Self.FK_dbo_GelenMesajlars_dbo_ChoiceDrives_ChoiceDriveID">
+            <End Role="ChoiceDrives" EntitySet="ChoiceDrives" />
+            <End Role="GelenMesajlars" EntitySet="GelenMesajlars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_GidenMesajlars_dbo_ChoiceDrives_ChoiceDriveID" Association="Self.FK_dbo_GidenMesajlars_dbo_ChoiceDrives_ChoiceDriveID">
+            <End Role="ChoiceDrives" EntitySet="ChoiceDrives" />
+            <End Role="GidenMesajlars" EntitySet="GidenMesajlars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_GelenMesajlars_dbo_Kullanicilars_KullanicilarID" Association="Self.FK_dbo_GelenMesajlars_dbo_Kullanicilars_KullanicilarID">
+            <End Role="Kullanicilars" EntitySet="Kullanicilars" />
+            <End Role="GelenMesajlars" EntitySet="GelenMesajlars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_GelenMesajlars_dbo_MesajKlasorus_MesajKlasoruID" Association="Self.FK_dbo_GelenMesajlars_dbo_MesajKlasorus_MesajKlasoruID">
+            <End Role="MesajKlasorus" EntitySet="MesajKlasorus" />
+            <End Role="GelenMesajlars" EntitySet="GelenMesajlars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_GidenMesajlars_dbo_Kullanicilars_KullanicilarID" Association="Self.FK_dbo_GidenMesajlars_dbo_Kullanicilars_KullanicilarID">
+            <End Role="Kullanicilars" EntitySet="Kullanicilars" />
+            <End Role="GidenMesajlars" EntitySet="GidenMesajlars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_GidenMesajlars_dbo_MesajKlasorus_MesajKlasoruID" Association="Self.FK_dbo_GidenMesajlars_dbo_MesajKlasorus_MesajKlasoruID">
+            <End Role="MesajKlasorus" EntitySet="MesajKlasorus" />
+            <End Role="GidenMesajlars" EntitySet="GidenMesajlars" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="seckinumurModelStoreContainer" CdmEntityContainer="seckinumurEntities">
+          <EntitySetMapping Name="Ayarlars">
+            <EntityTypeMapping TypeName="seckinumurModel.Ayarlars">
+              <MappingFragment StoreEntitySet="Ayarlars">
+                <ScalarProperty Name="AyarlarID" ColumnName="AyarlarID" />
+                <ScalarProperty Name="KullanicilarID" ColumnName="KullanicilarID" />
+                <ScalarProperty Name="DiskSiniri" ColumnName="DiskSiniri" />
+                <ScalarProperty Name="UyelikTipi" ColumnName="UyelikTipi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChoiceDrives">
+            <EntityTypeMapping TypeName="seckinumurModel.ChoiceDrives">
+              <MappingFragment StoreEntitySet="ChoiceDrives">
+                <ScalarProperty Name="ChoiceDriveID" ColumnName="ChoiceDriveID" />
+                <ScalarProperty Name="Konumu" ColumnName="Konumu" />
+                <ScalarProperty Name="Silindimi" ColumnName="Silindimi" />
+                <ScalarProperty Name="Paylasimdami" ColumnName="Paylasimdami" />
+                <ScalarProperty Name="KullanicilarID" ColumnName="KullanicilarID" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GelenMesajlars">
+            <EntityTypeMapping TypeName="seckinumurModel.GelenMesajlars">
+              <MappingFragment StoreEntitySet="GelenMesajlars">
+                <ScalarProperty Name="GelenMesajlarID" ColumnName="GelenMesajlarID" />
+                <ScalarProperty Name="Mesaj" ColumnName="Mesaj" />
+                <ScalarProperty Name="Okundumu" ColumnName="Okundumu" />
+                <ScalarProperty Name="Silindimi" ColumnName="Silindimi" />
+                <ScalarProperty Name="MesajKlasoruID" ColumnName="MesajKlasoruID" />
+                <ScalarProperty Name="KullanicilarID" ColumnName="KullanicilarID" />
+                <ScalarProperty Name="Gonderen" ColumnName="Gonderen" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+                <ScalarProperty Name="ChoiceDriveID" ColumnName="ChoiceDriveID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GidenMesajlars">
+            <EntityTypeMapping TypeName="seckinumurModel.GidenMesajlars">
+              <MappingFragment StoreEntitySet="GidenMesajlars">
+                <ScalarProperty Name="GidenMesajlarID" ColumnName="GidenMesajlarID" />
+                <ScalarProperty Name="Mesaj" ColumnName="Mesaj" />
+                <ScalarProperty Name="Okundumu" ColumnName="Okundumu" />
+                <ScalarProperty Name="Silindimi" ColumnName="Silindimi" />
+                <ScalarProperty Name="MesajKlasoruID" ColumnName="MesajKlasoruID" />
+                <ScalarProperty Name="KullanicilarID" ColumnName="KullanicilarID" />
+                <ScalarProperty Name="Gonderilen" ColumnName="Gonderilen" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+                <ScalarProperty Name="ChoiceDriveID" ColumnName="ChoiceDriveID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kullanicilars">
+            <EntityTypeMapping TypeName="seckinumurModel.Kullanicilars">
+              <MappingFragment StoreEntitySet="Kullanicilars">
+                <ScalarProperty Name="KullanicilarID" ColumnName="KullanicilarID" />
+                <ScalarProperty Name="Adi" ColumnName="Adi" />
+                <ScalarProperty Name="Sifresi" ColumnName="Sifresi" />
+                <ScalarProperty Name="Yetkisi" ColumnName="Yetkisi" />
+                <ScalarProperty Name="ProfilResmi" ColumnName="ProfilResmi" />
+                <ScalarProperty Name="Aktifmi" ColumnName="Aktifmi" />
+                <ScalarProperty Name="EklenmeTarihi" ColumnName="EklenmeTarihi" />
+                <ScalarProperty Name="Online" ColumnName="Online" />
+                <ScalarProperty Name="AyarlarID" ColumnName="AyarlarID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MesajKlasorus">
+            <EntityTypeMapping TypeName="seckinumurModel.MesajKlasorus">
+              <MappingFragment StoreEntitySet="MesajKlasorus">
+                <ScalarProperty Name="MesajKlasoruID" ColumnName="MesajKlasoruID" />
+                <ScalarProperty Name="KlasorAdi" ColumnName="KlasorAdi" />
+                <ScalarProperty Name="Silindimi" ColumnName="Silindimi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

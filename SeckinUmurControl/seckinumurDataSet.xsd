@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="seckinumurDataSet" targetNamespace="http://tempuri.org/seckinumurDataSet.xsd" xmlns:mstns="http://tempuri.org/seckinumurDataSet.xsd" xmlns="http://tempuri.org/seckinumurDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="seckinumurConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="seckinumurConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.SeckinUmurControl.Properties.Settings.GlobalReference.Default.seckinumurConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="KullanicilarsTableAdapter" GeneratorDataComponentClassName="KullanicilarsTableAdapter" Name="Kullanicilars" UserDataComponentName="KullanicilarsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="seckinumurConnectionString (Settings)" DbObjectName="seckinumur.dbo.Kullanicilars" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT Adi, Online FROM dbo.Kullanicilars</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Adi" DataSetColumn="Adi" />
+              <Mapping SourceColumn="Online" DataSetColumn="Online" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="seckinumurDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="seckinumurDataSet" msprop:Generator_UserDSName="seckinumurDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Kullanicilars" msprop:Generator_TableClassName="KullanicilarsDataTable" msprop:Generator_TableVarName="tableKullanicilars" msprop:Generator_TablePropName="Kullanicilars" msprop:Generator_RowDeletingName="KullanicilarsRowDeleting" msprop:Generator_RowChangingName="KullanicilarsRowChanging" msprop:Generator_RowEvHandlerName="KullanicilarsRowChangeEventHandler" msprop:Generator_RowDeletedName="KullanicilarsRowDeleted" msprop:Generator_UserTableName="Kullanicilars" msprop:Generator_RowChangedName="KullanicilarsRowChanged" msprop:Generator_RowEvArgName="KullanicilarsRowChangeEvent" msprop:Generator_RowClassName="KullanicilarsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Adi" msprop:Generator_ColumnVarNameInTable="columnAdi" msprop:Generator_ColumnPropNameInRow="Adi" msprop:Generator_ColumnPropNameInTable="AdiColumn" msprop:Generator_UserColumnName="Adi" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Online" msprop:Generator_ColumnVarNameInTable="columnOnline" msprop:Generator_ColumnPropNameInRow="Online" msprop:Generator_ColumnPropNameInTable="OnlineColumn" msprop:Generator_UserColumnName="Online" type="xs:boolean" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
