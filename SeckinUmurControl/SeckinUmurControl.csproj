@@ -189,6 +189,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bunfiu dll\Bunifu_UI_v1.52.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="img\erase.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
